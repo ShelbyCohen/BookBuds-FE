@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>JSON Web Token / AngularJS / Spring Boot example</title>
+    <title>BookBuds</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
@@ -13,16 +13,23 @@
     <script src="app.js"></script>
 </head>
 <body>
+    
     <script>
-        var loggedIn = 0;
+    $http.get("http://localhost:8080/users").then(function (response) {
+            console.log(response.data)
+            console.log("Hello from person")            
+            $scope.users = response.data;
+		});
     </script>
+    
     <div class="container" ng-controller='MainCtrl'>
     <h1>BookBuds Home Page!
         <br>Dave is a nerd who can't spell gud</h1>
-        <div ng-show=loggedIn>    <!--"!loggedIn()">-->
-		Please log in (tom and sally are valid names)<br>
-		<form ng-submit="login()">
-			Username: <input type="text" ng-model="userName"/><input type="submit" value="Login"/>
+        <div ng-show = "loggedIn()">
+		<form ng-submit="login()">    
+            <input type="text" ng-model="username" placeholder="username"><br>
+            <input type="password" ng-model="password" placeholder="password"><br>
+            <input type="submit" value="Login"/>
             </form>
         </div>
 	<div class="alert alert-danger" role="alert" ng-show="error.data.message">
@@ -30,7 +37,7 @@
 	  <span class="sr-only">Error:</span>
 	  {{error.data.message}}
 	</div>
-    <div ng-show=!loggedIn>    <!--"loggedIn()">-->
+    <div ng-show= "loggedIn()">
         <div class="row">
 			<div class="col-md-6">
 				<h3><span class="label label-success"></span> Welcome {{userName}}</h3>
