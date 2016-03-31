@@ -6,10 +6,6 @@
     <title>BookBuds</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
-    <script src="libs/jquery/jquery.js"></script>
-    <script src="libs/bootstrap/js/bootstrap.js"></script>
-    <script src="libs/angular/angular.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
@@ -29,6 +25,8 @@
 		<form ng-submit="login()">    
             <input type="text" ng-model="username" placeholder="username"><br>
             <input type="password" ng-model="password" placeholder="password"><br>
+            <input type="text" ng-model="question" placeholder="security question"><br>
+            <input type="text" ng-model="answer" placeholder="answer"><br>
             <input type="submit" value="Login"/>
             </form>
         </div>

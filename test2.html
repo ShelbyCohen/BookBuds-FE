@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<!--<script src="https://code.angularjs.org/1.4.0-rc.0/angular.js"></script>-->
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+
+    <p>Today's welcome message is:</p>
+
+    <h1>{{myWelcome}}</h1>
+
+</div>
+
+<p>The $http service requests a page on the server, and the response is set as the value of the "myWelcome" variable.</p>
+
+<!--
+<script>
+    var data = "name=Dave it works&password=ugh";
+    
+    var app = angular.module('myApp', []);
+    app.controller('myCtrl', function($scope, $http) {
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+        $http.post("http://localhost:8080/users/login", data)
+                .then(function(response) {
+                    $scope.myWelcome = response.data;
+                });
+    });
+</script>
+-->
+<script>
+    var data2 = {
+        "name" : "Randy",
+        "password" : "ugh"    
+    }
+    console.log(data2);
+    var dataSerialized = $.param(data2);
+    console.log("serialized bb")
+    var app = angular.module('myApp', []);
+    console.log("two");
+    app.controller('myCtrl', function($scope, $http){
+        $http.defauts.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        
+        $http.post("http://localhost:8080/users/login", dataSerialized)
+            .then(function(response){
+            $scope.myWelcome = response.data;
+        });
+    });
+</script>
+
+
+
+</body>
+</html>

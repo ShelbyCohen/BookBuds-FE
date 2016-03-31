@@ -9,7 +9,7 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
 
             $scope.login = function() {
                 $scope.error = null;
-                mainService.login($scope.username, $scope.password).then(function(token) {
+                mainService.login($scope.username, $scope.password, $scope.question, $scope.answer).then(function(token) {
                     $scope.token = token;
                     $http.defaults.headers.common.Authorization = 'Bearer ' + token;
                 },
@@ -17,6 +17,8 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
                     $scope.error = error
                     $scope.username = '';
                     $scope.password = '';
+                    $scope.question = '';
+                    $scope.answer = '';
                 });
             }
 
@@ -37,8 +39,10 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
 appModule.service('mainService', function($http) {
     return {
         login : function(username, password) {
-            return $http.post('/user/login', {username, password}).then(function(response) {
-                return response.data.token;
+            var data = 'name='+$scope.
+            return $http.post('localhost:8080/user', ).then(function(response) {
+                console.log(response.data)
+                return response.data;
             });
         },
     };
