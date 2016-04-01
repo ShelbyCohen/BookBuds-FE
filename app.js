@@ -21,6 +21,8 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
                     $scope.error = error;
                     $scope.userName = '';
                     $scope.password = '';
+					$scope.question = '';
+					$scope.answer = '';
                 });
             }
             $scope.createAccount = function() {
@@ -45,6 +47,8 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
             $scope.logout = function() {
                 $scope.userName = '';
                 $scope.password = '';
+				$scope.question = '';
+				$scope.answer = '';
                 $scope.token = null;
                 $http.defaults.headers.common.Authorization = '';
             }
@@ -75,7 +79,6 @@ appModule.service('mainService', function($http) {
             });
             
             return $http.post('http://localhost:8080/users/login', data).then(function(response){
-                $scope.myWelcome = response;
                 return response.data.token;
             })
         },
@@ -87,12 +90,11 @@ appModule.service('mainService', function($http) {
             $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 
-            return $http.post('http://localhost:8080/users/login', data).then(function(response) {
+            return $http.post('http://localhost:8080/users', data).then(function(response) {
                 return response.data.token;
             });
             
-            return $http.post('http://localhost:8080/users/login', data).then(function(response){
-                $scope.myWelcome = response;
+            return $http.post('http://localhost:8080/users', data).then(function(response){
                 return response.data.token;
             })
         },

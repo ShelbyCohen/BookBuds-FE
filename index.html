@@ -19,19 +19,19 @@
 		Please log in:</br>
 		<form ng-submit="login()">
 			Username: <input type="text" ng-model="userName"/><span><br>
-            Password: <input type="text" ng-model="password"/><br>
+            Password: <input type="password" ng-model="password"/><br>
             <input type="submit" value="Login"/>
 		</form>
-    </div>
-    <div ng-show="!loggedIn()">
+            
         <br><br>
         Create an account:<br>
             <form ng-submit="createAccount()">
                 Username: <input type="text" ng-model="userName"/><span><br>
-                Password: <input type="text" ng-model="password"/><br>
+                Password: <input type="password" ng-model="password"/><br>
                 Question: <input type="text" ng-model="question"/><br>
                 Answer: <input type="text" ng-model="answer"/><br>
                 <input type="submit" value="Create Account"/>
+            
             </form>
 	</div>
 	<div class="alert alert-danger" role="alert" ng-show="error.data.message">
@@ -47,20 +47,7 @@
 			</div>
 			<div class="col-md-4">
 	 	<div class="row header">
-			<div class="col-sm-4">{{userName}} is a</div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2">User</div>
-			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleUser"></span></div>
-		</div>
-		<div class="row">
-			<div class="col-sm-2">Admin</div>
-			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleAdmin"></span></div>
-		</div>	
-		<div class="row">
-			<div class="col-sm-2">Foo</div>
-			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleFoo"></span></div>
-		</div>				
+			<div class="col-sm-4">{{userName}} is a member of BookBuds</div>
 			</div>
 		</div>
 	</div>
