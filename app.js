@@ -5,6 +5,7 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
             $scope.greeting = 'BookBuddaroos';
             $scope.token = null;
             $scope.error = null;
+			$scope.header = null;
 //            $scope.roleUser = false;
 //            $scope.roleAdmin = false;
 //            $scope.roleFoo = false;
@@ -15,6 +16,7 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
                     $scope.token = token;
                     console.log("token="+token);
                     $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+					$scope.header = 'Bearer ' + token;
                     //$scope.checkRoles();
                 },
                 function(error){
@@ -41,6 +43,16 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
 					$scope.answer = '';
                 });
             }
+			$scope.getAccountDetails = function() {
+				$scope.error = null;
+				mainService.getAccountDetails().then(function(data){
+					$scope.data = data;
+					console.log("data in controller: "+data);
+				},
+				function(error){
+					$scope.error = error;
+				});
+			}
 
           
 
@@ -98,6 +110,16 @@ appModule.service('mainService', function($http) {
                 return response.data.token;
             })
         },
+		
+		getAccountDetails : function(header) {
+			var data = "Authorization	: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc'";
+			
+			return $http.get('http://localhost:8080/users/account', header).then(function(response){
+				console.log("response = "+response);
+				console.log("response.data = " + response.data);
+				return response.data;
+			});
+		},
 
         hasRole : function(role) {
             return $http.get('/api/role/' + role).then(function(response){

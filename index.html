@@ -46,6 +46,10 @@
 	 			<a href ng-click="logout()">(logout)</a>
 			</div>
 			<div class="col-md-4">
+            
+                <form ng-submit="getAccountDetails()">
+                    <input type="submit" value="Get Account Details"/>
+                </form>
 	 	<div class="row header">
 			<div class="col-sm-4">{{userName}} is a member of BookBuds</div>
 			</div>
