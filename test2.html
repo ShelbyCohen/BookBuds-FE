@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<!--<script src="https://code.angularjs.org/1.4.0-rc.0/angular.js"></script>-->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>-->
+<script src="https://code.angularjs.org/1.4.0-rc.0/angular.js"></script>
 <body>
 
 <div ng-app="myApp" ng-controller="myCtrl">
@@ -35,7 +35,7 @@
         "password" : "ugh"    
     }
     console.log(data2);
-    var dataSerialized = $.param(data2);
+    var dataSerialized = httpparamserializer(data2);
     console.log("serialized bb")
     var app = angular.module('myApp', []);
     console.log("two");
