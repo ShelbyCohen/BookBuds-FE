@@ -13,23 +13,38 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
                 $scope.error = null;
                 mainService.login($scope.userName, $scope.password).then(function(token) {
                     $scope.token = token;
+                    console.log("token="+token);
                     $http.defaults.headers.common.Authorization = 'Bearer ' + token;
                     //$scope.checkRoles();
                 },
                 function(error){
-                    $scope.error = error
+                    $scope.error = error;
                     $scope.userName = '';
+                    $scope.password = '';
+                });
+            }
+            $scope.createAccount = function() {
+                $scope.error = null;
+                mainService.createAccount($scope.userName, $scope.password, $scope.question, $scope.answer).then(function(token){
+                    $scope.token = token;
+                    console.log("token="+token);
+                    
+                    $http.defaults.headers.common.Autorization = 'Bearer ' + token;
+                },
+				function(error){
+					$scope.error = error;
+					$scope.userName = '';
+					$scope.password = '';
+					$scope.question = '';
+					$scope.answer = '';
                 });
             }
 
-            $scope.checkRoles = function() {
-                mainService.hasRole('user').then(function(user) {$scope.roleUser = user});
-                mainService.hasRole('admin').then(function(admin) {$scope.roleAdmin = admin});
-                mainService.hasRole('foo').then(function(foo) {$scope.roleFoo = foo});
-            }
+          
 
             $scope.logout = function() {
                 $scope.userName = '';
+                $scope.password = '';
                 $scope.token = null;
                 $http.defaults.headers.common.Authorization = '';
             }
@@ -37,6 +52,8 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
             $scope.loggedIn = function() {
                 return $scope.token !== null;
             }
+            
+            
         } ]);
 
 
@@ -53,7 +70,24 @@ appModule.service('mainService', function($http) {
             $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
 
-            return $http.post('http://localhost:8080/users/login', data ).then(function(response) {
+            return $http.post('http://localhost:8080/users/login', data).then(function(response) {
+                return response.data.token;
+            });
+            
+            return $http.post('http://localhost:8080/users/login', data).then(function(response){
+                $scope.myWelcome = response;
+                return response.data.token;
+            })
+        },
+		
+		createAccount : function(username, password, question, answer) {
+            var data = "name="+username+"&password="+password+"&question="+question+"answer="+answer;
+			
+			console.log(data)
+            $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+
+
+            return $http.post('http://localhost:8080/users/login', data).then(function(response) {
                 return response.data.token;
             });
             

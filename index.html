@@ -16,12 +16,23 @@
 <div class="container" ng-controller='MainCtrl'>
 	<h1>{{greeting}}</h1>
 	<div ng-show="!loggedIn()">
-		Please log in (tom and sally are valid names)</br>
+		Please log in:</br>
 		<form ng-submit="login()">
 			Username: <input type="text" ng-model="userName"/><span><br>
             Password: <input type="text" ng-model="password"/><br>
             <input type="submit" value="Login"/>
 		</form>
+    </div>
+    <div ng-show="!loggedIn()">
+        <br><br>
+        Create an account:<br>
+            <form ng-submit="createAccount()">
+                Username: <input type="text" ng-model="userName"/><span><br>
+                Password: <input type="text" ng-model="password"/><br>
+                Question: <input type="text" ng-model="question"/><br>
+                Answer: <input type="text" ng-model="answer"/><br>
+                <input type="submit" value="Create Account"/>
+            </form>
 	</div>
 	<div class="alert alert-danger" role="alert" ng-show="error.data.message">
 	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
