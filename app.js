@@ -113,8 +113,26 @@ appModule.service('mainService', function($http) {
 		
 		getAccountDetails : function(header) {
 			var data = "Authorization	: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc'";
+            
+            var settings = {
+                  "async": true,
+                  "crossDomain": true,
+                  "url": "http://localhost:8080/users/account",
+                  "method": "GET",
+                  "headers": {
+                    "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc",
+                    "cache-control": "no-cache",
+                    "postman-token": "faabcf28-a588-6e2e-6122-e73d8f6d71a4"
+                  },
+                  "data": {
+                    "name": "Nick",
+                    "password": "ugh",
+                    "question": "nope",
+                    "answer": "yup"
+                  }
+                }
 			
-			return $http.get('http://localhost:8080/users/account', header).then(function(response){
+			return $http.get(settings).then(function(response){
 				console.log("response = "+response);
 				console.log("response.data = " + response.data);
 				return response.data;
