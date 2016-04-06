@@ -33,7 +33,7 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
                     $scope.token = token;
                     console.log("token="+token);
                     
-                    $http.defaults.headers.common.Autorization = 'Bearer ' + token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
                 },
 				function(error){
 					$scope.error = error;
@@ -106,33 +106,33 @@ appModule.service('mainService', function($http) {
                 return response.data.token;
             });
             
-            return $http.post('http://localhost:8080/users', data).then(function(response){
-                return response.data.token;
-            })
+//            return $http.post('http://localhost:8080/users', data).then(function(response){
+//                return response.data.token;
+//            })
         },
 		
 		getAccountDetails : function(header) {
 			var data = "Authorization	: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc'";
             
-            var settings = {
-                  "async": true,
-                  "crossDomain": true,
-                  "url": "http://localhost:8080/users/account",
-                  "method": "GET",
-                  "headers": {
-                    "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc",
-                    "cache-control": "no-cache",
-                    "postman-token": "faabcf28-a588-6e2e-6122-e73d8f6d71a4"
-                  },
-                  "data": {
-                    "name": "Nick",
-                    "password": "ugh",
-                    "question": "nope",
-                    "answer": "yup"
-                  }
-                }
-			
-			return $http.get(settings).then(function(response){
+//            var settings = {
+//                  "async": true,
+//                  "crossDomain": true,
+//                  "url": "http://localhost:8080/users/account",
+//                  "method": "GET",
+//                  "headers": {
+//                    "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJOaWNrIiwiaWQiOjF9.KhStwKp6-ma3ZxYI8EhLD8oRHz8AVnWNJC37-QljOMc",
+//                    "cache-control": "no-cache",
+//                    "postman-token": "faabcf28-a588-6e2e-6122-e73d8f6d71a4"
+//                  },
+//                  "data": {
+//                    "name": "Nick",
+//                    "password": "ugh",
+//                    "question": "nope",
+//                    "answer": "yup"
+//                  }
+//                }
+//			
+			return $http.get('http://localhost:8080/users/account').then(function(response){
 				console.log("response = "+response);
 				console.log("response.data = " + response.data);
 				return response.data;
